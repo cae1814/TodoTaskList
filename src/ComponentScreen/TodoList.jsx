@@ -179,11 +179,6 @@ export const TodoList = () => {
                               <div className="progress-bar" style={{width: item.avance+"%"}}>{item.avance}%</div>
                             }
                           </div>  
-                          <div id="botones" className="mt-1 font-size-12">
-                          <button type="button" className="btn btn-outline-secondary btn-sm btn-sm-prioridad" onClick={() => l_submitUpdatetHandler(2)}> 1 </button>&nbsp;
-                          <button type="button" className="btn btn-outline-primary btn-sm btn-sm-prioridad" onClick={() => l_submitUpdatetHandler(2)}> 2 </button>&nbsp;
-                          <button type="button" className="btn btn-outline-danger btn-sm btn-sm-prioridad" onClick={() => l_submitUpdatetHandler(2)}> 3 </button>&nbsp;
-                          </div>
                         </div>
                       </div>
                       <div className="col-lg-2 col-md-2 col-sm-2 text-end">
