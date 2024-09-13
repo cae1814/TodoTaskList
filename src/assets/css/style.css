@@ -3,6 +3,23 @@
     --bs-btn-padding-x: 5px;
 }
 
+.hr-line {
+    margin: 2px;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: .9;
+    border: 1px solid;
+}
+
+.hr-line-buttons {
+    margin: 2px;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: .25;
+    border: 1px solid #0d6efd;
+    margin-top: 10px;
+}
+
 .form {
     background-color: #b4b9c640;
     border: solid 1px black;
@@ -22,6 +39,7 @@
     margin-top: 8px;
     margin-bottom: 8px;
 }
+
 .list-group-item {
     background-color: #212529 !important;
     color: white !important;
@@ -31,27 +49,27 @@
     border: none;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.show{
-    display:inline;
+.show {
+    display: inline;
 }
 
-.table:hover{
-    cursor: pointer;    
+.table:hover {
+    cursor: pointer;
 }
 
-.text-aling-left{
+.text-aling-left {
     text-align: left;
 }
 
-.text-align-right{
+.text-align-right {
     text-align: right;
 }
 
-.text-align-center{
+.text-align-center {
     text-align: center;
 }
 
@@ -75,92 +93,119 @@
     color: orange;
 }
 
-.font-size-9{
+.font-size-8 {
+    font-size: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-size-9 {
     font-size: 9px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-10 {
     font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-11 {
     font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-12 {
     font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-13 {
     font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-14 {
     font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-15 {
     font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-16 {
     font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-17 {
     font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-18 {
     font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-20 {
     font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-21 {
     font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-22 {
     font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-23 {
     font-size: 23px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-24 {
     font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-25 {
     font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-26 {
     font-size: 26px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-27 {
     font-size: 27px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-28 {
     font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-29 {
     font-size: 29px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-30 {
     font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .font-size-33 {
     font-size: 33px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .selectFilter {
@@ -215,4 +260,4 @@
     white-space: nowrap;
     background-color: #BDBDBD;
     transition: var(--bs-progress-bar-transition);
-  }
+}
