@@ -138,6 +138,58 @@ export const TodoList = () => {
             <div className="text-start" id="todolist">
               <h5 className="font-size-33 text-right font-color-gray">TODO List</h5>
             </div>
+            <div>
+  <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTaskModal">
+    Crear Tarea
+  </button>
+
+  <div className="modal fade" id="createTaskModal" tabIndex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+    <div className="modal-dialog">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title" id="createTaskModalLabel">Crear Nueva Tarea</h5>
+          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div className="modal-body">
+          <form>
+            <div className="mb-3">
+              <label htmlFor="taskId" className="form-label">ID</label>
+              <input type="text" className="form-control" id="taskId" value={id} readOnly />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="taskName" className="form-label">Nombre de la tarea</label>
+              <input type="text" className="form-control" id="taskName" value={tarea} onChange={(e) => setTarea(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="taskStatus" className="form-label">Estado</label>
+              <select className="form-select" id="taskStatus" value={idestado} onChange={(e) => setIdEstado(e.target.value)}>
+                <option value="1">Por hacer</option>
+                <option value="2">En progreso</option>
+                <option value="3">Finalizada</option>
+                <option value="4">Atrasada</option>
+                <option value="5">Cancelada</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="taskProgress" className="form-label">Avance (%)</label>
+              <input type="number" className="form-control" id="taskProgress" value={avance} onChange={(e) => setAvance(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="taskUser" className="form-label">Usuario</label>
+              <input type="text" className="form-control" id="taskUser" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+            </div>
+          </form>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" className="btn btn-primary" onClick={submitHandler}>Grabar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
             <div className="border pt-3 px-3 col-sm-9 col-md-9 col-lg-9 backgorund-color-app2" style={{ paddingright: "7px" }} >
               <div className="row">
                 <div className="col-sm-10 col-md-10 col-lg-10 mb-4 text-end">
