@@ -14,6 +14,8 @@ export const HookHelper = () => {
     const [jidestado, setJidEstado] = useState('');
     const [javance, setJavance] = useState('');
     const [jusuario, setJusuario] = useState('');
+    const [jcreador, setJcreador] = useState('');
+    const [jmodificador, setJmodificador] = useState('');
 
     // Metodo para filtro en la pagina //
     const getTask = async (idestado, orderid) => {;
@@ -25,11 +27,12 @@ export const HookHelper = () => {
     const submitHandler = async (event) => {
         event.preventDefault();
         const userObject = {
-            name: jname,
-            password: jpassword,
-            email: jemail,
-            role: jrole,
-            avatar: javatar
+            tarea: jtarea,
+            descripcion: jdescripcion,
+            idestado: joperacion===1 ? 1 : jidestado,
+            avance: joperacion===1 ? 0 : javance,
+            creador: jcreador,
+            modificador: joperacion===1 ? '': jmodificador
         }
 
         var url;
@@ -41,7 +44,7 @@ export const HookHelper = () => {
             //console.info("Creando ...");
         } else {
             // Update //
-            url = "https://api.escuelajs.co/api/v1/users/"+idUser;
+            url = 'http://190.107.150.60:1510/task/'+idUser;
             resultApi = await axios.put(url+iduser, userObject, {headers: {"Content-Type":"application/json", "Accept":"application/json"}});
             //console.info("Actualizando ...");
         }
