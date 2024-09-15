@@ -221,27 +221,34 @@ export const TodoList = () => {
                       <div className="col-lg-10 col-md-10 col-sm-10">
                         <div className="mb-1">
                         <div id="todoDescription" className="font-size-12"><i className={`fa ${item.icon} ${item.color}`} style={{ fontSize: "16px" }}></i><span className={`${item.color}`}><b>&nbsp;{item.estado}</b></span></div>
-                        <hr></hr>
                           <div id="todoDescription" className={`font-size-15 ${item.tipo_letra}`}><b>{item.id} | {item.tarea}</b> &nbsp; &nbsp;</div>
+                          <hr className={`hr-line ${item.color}`}></hr>
                           <div id="todoDescription" className={`font-size-13 ${item.tipo_letra}`}><b>Descripción:</b> {item.descripcion}</div>
-                          <div id="todoDescription" className={`font-size-12 ${item.tipo_letra}`}><i className='fa fa-user' style={{ fontSize: "14px" }}></i>&nbsp;<b>Modificado por: </b>{item.modificado_por} &nbsp;|&nbsp; <i className='fa fa-calendar-o' style={{ fontSize: "14px" }}></i>&nbsp;<b>Fecha: </b>{item.fecha_modificacion} &nbsp;&nbsp;|&nbsp;&nbsp; <i className='fa fa-user' style={{ fontSize: "14px" }}></i>&nbsp;<b>Creado por: </b>{item.creado_por} &nbsp;|&nbsp; <i className='fa fa-calendar-o' style={{ fontSize: "14px" }}></i>&nbsp;<b>Fecha: </b>{item.fecha_creacion}</div>
-                          <div className="progress mt-1" role="progressbar" aria-label="Example with label" aria-valuenow={item.avance} aria-valuemin="0" aria-valuemax="100">
-                            { item.idestado > 4 ? 
-                              <div className="progress-bar-deactive" style={{width: item.avance+"%"}}>{item.avance}%</div> :
-                              <div className="progress-bar" style={{width: item.avance+"%"}}>{item.avance}%</div>
-                            }
-                          </div>  
+                          <div id="todoDescription" className={`font-size-11 font-color-gray ${item.tipo_letra}`}><i className='fa fa-user' style={{ fontSize: "13px" }}></i>&nbsp;<b>Modificado por: </b>{item.modificado_por} &nbsp;|&nbsp; <i className='fa fa-calendar-o' style={{ fontSize: "13px" }}></i>&nbsp;<b>Fecha: </b>{item.fecha_modificacion} &nbsp;&nbsp;|&nbsp;&nbsp; <i className='fa fa-user' style={{ fontSize: "13px" }}></i>&nbsp;<b>Creado por: </b>{item.creado_por} &nbsp;|&nbsp; <i className='fa fa-calendar-o' style={{ fontSize: "13px" }}></i>&nbsp;<b>Fecha: </b>{item.fecha_creacion}</div> 
                         </div>
                       </div>
                       <div className="col-lg-2 col-md-2 col-sm-2 text-end">
-                      { item.mostrar == 0 ? <div>
-                        <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitUpdatetHandler(2)} data-bs-toggle="modal" data-bs-target="#confEdit"><i className='fa fa-edit' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                        <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitCompletetHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confComplete"><i className='fa fa-check-square-o' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                        <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitCancelHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confCancel"><i className='fa fa-times-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                        <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitDeleteHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confDelete"><i className='fa fa-trash-o' style={{ fontSize: "16px" }}></i></button>
+                        <div>
+                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitUpdatetHandler(2)} data-bs-toggle="modal" data-bs-target="#confEdit"><i className='fa fa-edit' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitCompletetHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confComplete"><i className='fa fa-check-square-o' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitCancelHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confCancel"><i className='fa fa-times-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitDeleteHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confDelete"><i className='fa fa-trash-o' style={{ fontSize: "16px" }}></i></button>
+                          <hr className="hr-line-buttons"></hr>
+                          <div className="text-start form-floating mb-3">
+                            <div className="progress mt-1" role="progressbar" aria-label="Example with label" aria-valuenow={item.avance} aria-valuemin="0" aria-valuemax="100">
+                            { item.idestado >= 4 ? 
+                              <div className="progress-bar-deactive" style={{width: item.avance+"%"}}>{item.avance}%</div> :
+                              <div className="progress-bar" style={{width: item.avance+"%"}}>{item.avance}%</div>
+                            }
+                            </div>
+
+                            <div className="font-size-11 font-color-gray">
+                              <label for="floatingTextarea2Disabled">Progreso de la tarea</label>
+                            </div>
+
+                          
+                          </div>
                         </div>
-                        : null
-                      }
                       </div>
                     </div>
                   </div>
