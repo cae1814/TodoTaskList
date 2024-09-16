@@ -21,11 +21,10 @@ export const TodoList = () => {
 
   const [tarea, setTarea] = useState();
   const [descripcion, setDescripcion] = useState();
-  const [idestado, setIdestado] = useState();
+  const [idestado, setIdEstado] = useState();
   const [estado, setEstado] = useState();
   const [avance, setAvance] = useState();
-  const [creador, setCreador] = useState();
-  const [creadorpor, setCreadorpor] = useState();
+  const [creadoPor, setCreadopor] = useState();
 
   const l_changeTarea = (p_tarea) => {
     setTarea(p_tarea);
@@ -39,8 +38,12 @@ export const TodoList = () => {
 
   const l_changeIdEstado = () => {
     const value = event.target.value;
-    setIdestado(value);
+    setIdEstado(value);
     setJidestado(value);
+  }
+
+  const l_changeCreadoPor = (p_creado_por) => {
+    setCreadorpor(p_creado_por);
   }
 
   const l_changeAvance = (p_avance) => {
@@ -78,10 +81,10 @@ export const TodoList = () => {
       setId(p_id);
       setTarea(p_tarea);
       setDescripcion(p_descripcion);
-      setIdestado(p_idestado);
+      setIdEstado(p_idestado);
       setEstado(p_estado);
       setAvance(p_avance);
-      setCreadorpor(p_creadopor);
+      setCreadopor(p_creadopor);
     }
   }
   
@@ -109,13 +112,13 @@ export const TodoList = () => {
             <div>  
           </div>
 
-            <div className="border pt-3 px-3 col-sm-9 col-md-9 col-lg-9 backgorund-color-app2" style={{ paddingright: "7px" }} >
+            <div className="border pt-3 px-3 col-sm-9 col-md-9 col-lg-9 background-color-app2" style={{ paddingright: "7px" }} >
               <div className="row">
                 <div className="col-sm-10 col-md-10 col-lg-10 mb-4 text-end">
-                  <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitNewHandler} data-bs-toggle="modal" data-bs-target="#confNew"><i className='fa fa-plus-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                  <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => l_getTask(1)}><i className='fa fa-sort-alpha-asc' style={{ fontSize: "14px" }}></i></button>&nbsp;
-                  <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => l_getTask(2)}><i className='fa fa-sort-alpha-desc' style={{ fontSize: "14px" }}></i></button>&nbsp;
-                  <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_getTask(2)}><i className='fa fa-refresh' style={{ fontSize: "14px" }}></i></button>
+                  <button type="button" className="btn btn-outline-primary btn-sm effecs" onClick={() => l_submitHandler(1)} data-bs-toggle="modal" data-bs-target="#confNew"><i className='fa fa-plus-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                  <button type="button" className="btn btn-outline-secondary btn-sm effecs" onClick={() => l_getTask(1)}><i className='fa fa-sort-alpha-asc' style={{ fontSize: "14px" }}></i></button>&nbsp;
+                  <button type="button" className="btn btn-outline-secondary btn-sm effecs" onClick={() => l_getTask(2)}><i className='fa fa-sort-alpha-desc' style={{ fontSize: "14px" }}></i></button>&nbsp;
+                  <button type="button" className="btn btn-outline-primary btn-sm effecs" onClick={() => l_getTask(2)}><i className='fa fa-refresh' style={{ fontSize: "14px" }}></i></button>
                 </div>
                 <div className="col-sm-2 col-md-2 col-lg-2">
                   <select name="role" id="role" className="form-select selectFilter" aria-label="Default select example" onChange={handleChange}>
@@ -148,13 +151,13 @@ export const TodoList = () => {
                       </div>
                       <div className="col-lg-2 col-md-2 col-sm-2 text-end">
                         <div>
-                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(2, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confEdit"><i className='fa fa-edit' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confComplete"><i className='fa fa-check-square-o' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confCancel"><i className='fa fa-times-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confDelete"><i className='fa fa-trash-o' style={{ fontSize: "16px" }}></i></button>
+                          <button type="button" className="btn btn-outline-primary btn-sm effecs" onClick={() => l_submitHandler(2, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confEdit"><i className='fa fa-edit' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm effecs" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confComplete"><i className='fa fa-check-square-o' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm effecs" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confCancel"><i className='fa fa-times-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm effecs" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confDelete"><i className='fa fa-trash-o' style={{ fontSize: "16px" }}></i></button>
                           <hr className="hr-line-buttons"></hr>
                           <div className="text-start form-floating mb-3">
-                            <div className="progress mt-1" role="progressbar" aria-label="Example with label" aria-valuenow={item.avance} aria-valuemin="0" aria-valuemax="100">
+                            <div className="progress mt-1 effecs" role="progressbar" aria-label="Example with label" aria-valuenow={item.avance} aria-valuemin="0" aria-valuemax="100">
                             { item.idestado >= 4 ? 
                               <div className="progress-bar-deactive" style={{width: item.avance+"%"}}>{item.avance}%</div> :
                               <div className="progress-bar" style={{width: item.avance+"%"}}>{item.avance}%</div>
@@ -236,7 +239,7 @@ export const TodoList = () => {
               </div>
               <div className="modal-body">
                 <p style={{ fontSize: "16px"}}><span className="font-color-red"><i className='fa fa-exclamation-triangle' style={{ fontSize: "17px" }}></i>&nbsp;<b>Cuidado!</b></span></p>
-                <p style={{ fontSize: "16px"}}>¿Esta seguro que ca cancelar la tarea <b>{tarea}</b>?</p>
+                <p style={{ fontSize: "16px"}}>¿Esta seguro que desea cancelar la tarea <b>{tarea}</b>?</p>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-outline-primary btn-sm" data-bs-dismiss="modal">Cancelar</button>
@@ -250,28 +253,28 @@ export const TodoList = () => {
           <div className="modal-dialog modal-md modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h1 className="modal-title" id="staticBackdropLabel" style={{ fontSize: "14px"}} ><b>Crear Nueva Tarea</b></h1>
+                <h1 className="modal-title" id="staticBackdropLabel" style={{ fontSize: "14px"}} ><b>Todo List | Crear Tarea</b></h1>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
                 <div className="card" style={{ width: "100%"}}>
                   <div className="text-center mt-3">
-                    <img src="../assets/img/tarea.png" className="card-img-top" alt="..." style={{ width: "50%"}} />
+                    <img src="https://cdn.icon-icons.com/icons2/37/PNG/512/addthelist_a%C3%B1adir_3477.png" className="card-img-top" alt="..." style={{ width: "20%"}} />
                   </div>
                     <div className="card-body">
                     <form onSubmit={submitHandler}>
-                        <legend className="font-size-17 text-center"><b>{tarea}</b></legend>
+                        <legend className="font-size-17 text-center"><b>Nueva tarea</b></legend>
                         <div className="mb-2">
                           <label htmlFor="Tarea" className="form-label font-size-14">Tarea</label>
-                          <input type="text" name="Tarea" id="Tarea" className="form-control font-size-14" placeholder="Tarea" defaultValue={tarea} onChange={(e) => l_changeTarea(e.target.value)} />
+                          <input type="text" name="Tarea" id="Tarea" className="form-control font-size-14" placeholder="Tarea" defaultValue="" onChange={(e) => l_changeTarea(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="descripcion" className="form-label font-size-14">Descripcion</label>
-                          <textarea rows="5" cols="33" name="descripcion" id="descripcion" className="form-control font-size-14" placeholder="Descripcion" defaultValue={descripcion} onChange={(e) => l_changeDescripcion(e.target.value)} />
+                          <textarea rows="5" cols="33" name="descripcion" id="descripcion" className="form-control font-size-14" placeholder="Descripcion" defaultValue="" onChange={(e) => l_changeDescripcion(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="creador" className="form-label font-size-14">Creado por:</label>
-                          <input type="text" name="creador" id="creador" className="form-control font-size-14" placeholder="Creado por:" defaultValue={creador} onChange={(e) => l_changeCreador(e.target.value)} />
+                          <input disabled type="text" name="creador" id="creador" className="form-control font-size-14" placeholder="Creado por:" defaultValue="admin" onChange={(e) => l_changeCreadoPor(e.target.value)} />
                         </div>
                         <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-check-square' style={{ fontSize: "16px" }}></i>&nbsp;Guardar</button>                    
                     </form>
@@ -295,18 +298,18 @@ export const TodoList = () => {
               <div className="modal-body">
                 <div className="card" style={{ width: "100%"}}>
                   <div className="text-center mt-3">
-                    <img src="https://img.freepik.com/vector-premium/icono-lista-verificacion-iconos-web-establecidos_925480-66.jpg?w=826" className="card-img-top" alt="..." style={{ width: "30%"}} />
+                    <img src="https://img.freepik.com/vector-premium/icono-lista-verificacion-iconos-web-establecidos_925480-66.jpg?w=826" className="card-img-top" alt="..." style={{ width: "20%"}} />
                   </div>
                     <div className="card-body">
                     <form onSubmit={submitHandler}>
-                        <legend className="font-size-17 text-center"><b><u>{tarea}</u></b></legend>
+                        <legend className="font-size-17 text-center"><b><u>Modificar tarea</u></b></legend>
                         <div className="mb-2">
                           <label htmlFor="Tarea" className="form-label font-size-14">Tarea</label>
                           <input type="text" name="Tarea" id="Tarea" className="form-control font-size-14" placeholder="Tarea" defaultValue={tarea} onChange={(e) => l_changeTarea(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="descripcion" className="form-label font-size-14">Descripcion</label>
-                          <textarea rows="5" cols="33" name="descripcion" id="descripcion" className="form-control font-size-14" placeholder="Descripcion" defaultValue={descripcion} onChange={(e) => l_changeDescripcion(e.target.value)} />
+                          <textarea rows="3" cols="33" name="descripcion" id="descripcion" className="form-control font-size-14" placeholder="Descripcion" defaultValue={descripcion} onChange={(e) => l_changeDescripcion(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="idestado" className="form-label font-size-14">Estado</label>
@@ -325,7 +328,7 @@ export const TodoList = () => {
                         </div>
                         <div className="mb-2">
                           <label htmlFor="modificador" className="form-label font-size-14">Creado por:</label>
-                          <input disabled type="text" name="modificador" id="modificador" className="form-control font-size-14" placeholder="Modificado por" defaultValue={creadorpor} />
+                          <input disabled type="text" name="modificador" id="modificador" className="form-control font-size-14" placeholder="Modificado por" defaultValue={creadoPor} onChange={(e) => l_changeCreadoPor(e.target.value)} />
                         </div>
                         <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-check-square' style={{ fontSize: "16px" }}></i>&nbsp;Guardar</button>                    
                     </form>

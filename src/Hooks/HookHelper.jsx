@@ -14,8 +14,6 @@ export const HookHelper = () => {
     const [jidestado, setJidestado] = useState('');
     const [javance, setJavance] = useState('');
     const [jusuario, setJusuario] = useState('');
-    const [jcreador, setJcreador] = useState('');
-    const [jmodificador, setJmodificador] = useState('');
 
     const [jvarFilter, setJvarFilter] = useState();
     const [jvarordering, setJvarordering] = useState();
