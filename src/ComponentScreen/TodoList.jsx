@@ -13,83 +13,39 @@ export const TodoList = () => {
   const [operacion, setOperacion] = useState();
   const [selectedOption, setSelectedOption] = useState(-2);
 
-  const handleChange = (selectedOption) => {
+  const handleChange = () => {
     const value = event.target.value;
     setSelectedOption(value);
     getTask(value, 2);
   };
 
-  // Borarar
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const [role, setRole] = useState();
-  const [avatar, setAvatar] = useState();
+  const [tarea, setTarea] = useState();
+  const [descripcion, setDescripcion] = useState();
+  const [idestado, setIdestado] = useState();
+  const [estado, setEstado] = useState();
+  const [avance, setAvance] = useState();
+  const [creador, setCreador] = useState();
+  const [creadorpor, setCreadorpor] = useState();
 
-  const [tarea, setTarea] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [idestado, setIdEstado] = useState('');
-  const [avance, setAvance] = useState('');
-  const [usuario, setUsuario] = useState('');
-
-  const l_submitDeletetHandler = (id, name) => {
-    setId(id);
-    setName(name);
-  }
-
-  const l_changeName = (p_name) => {
-    setName(p_name);
-    setJname(p_name);
-  }
-
-  const l_changePassword = (p_password) => {
-    setPassword(p_password);
-    setJpassword(p_password);
-  }
-
-  const l_changeEmail = (p_email) => {
-    setEmail(p_email);
-    setJemail(p_email);
-  }
-
-  const l_changeRole = (p_role) => {
-    setRole(p_role);
-    setJrole(p_role);
-  }
-
-  const l_changeAvatar = (p_avatar) => {
-    setAvatar(p_avatar);
-    setJavatar(p_avatar);
-  }
-
-  const l_submitCompletetHandler = (p_id, p_tarea, p_descripcion) => {
-    setId(p_id);
+  const l_changeTarea = (p_tarea) => {
     setTarea(p_tarea);
-    setDescripcion(p_descripcion);
-
-    setJid(p_id);
     setJtarea(p_tarea);
+  }
+
+  const l_changeDescripcion = (p_descripcion) => {
+    setDescripcion(p_descripcion);
     setJdescripcion(p_descripcion);
   }
 
-  const l_submitDeleteHandler = (p_id, p_tarea, p_descripcion) => {
-    setId(p_id);
-    setTarea(p_tarea);
-    setDescripcion(p_descripcion);
-
-    setJid(p_id);
-    setJtarea(p_tarea);
-    setJdescripcion(p_descripcion);
+  const l_changeIdEstado = () => {
+    const value = event.target.value;
+    setIdestado(value);
+    setJidestado(value);
   }
 
-  const l_submitCancelHandler = (p_id, p_tarea, p_descripcion) => {
-    setId(p_id);
-    setTarea(p_tarea);
-    setDescripcion(p_descripcion);
-
-    setJid(p_id);
-    setJtarea(p_tarea);
-    setJdescripcion(p_descripcion);
+  const l_changeAvance = (p_avance) => {
+    setAvance(p_avance);
+    setJavance(p_avance);
   }
 
   const l_getTask = (p_value) => {
@@ -97,26 +53,38 @@ export const TodoList = () => {
     getTask(selectedOption, p_value);
   }
 
-  const l_submitNewHandler = (p_operacion, p_id, p_name, p_password, p_email, p_role, p_avatar) => {
+  const l_submitHandler = (p_operacion, p_id, p_tarea, p_descripcion, p_idestado, p_estado, p_avance, p_creadopor) => {
+    console.info("["+p_operacion+",["+p_id+"],["+p_tarea+"],["+p_descripcion+"],["+p_idestado+": "+p_estado+"],["+p_avance+"]");
     setOperacion(p_operacion);
     setJoperacion(p_operacion);
 
-    // Almacenamiento local //
-    setId(p_id);
-    setName(p_name);
-    setPassword(p_password);
-    setEmail(p_email);
-    setRole(p_role);
-    setAvatar(p_avatar);
+    if (p_operacion == 1) {
+      // Create //
+      // Almacenamiento local //
+      setId("");
+      setTarea("");
+      setDescripcion("");
+      setIdEstado("");
+      setAvance("");
+    } else {
+      // Modificar //
+      // Hook //
+      setJid(p_id);
+      setJtarea(p_tarea);
+      setJdescripcion(p_descripcion);
+      setJidestado(p_idestado);
+      setJavance(p_avance);
 
-    // Hook //
-    setIdUser(p_id);
-    setJname(p_name);
-    setJpassword(p_password);
-    setJemail(p_email);
-    setJrole(p_role);
-    setJavatar(p_avatar);
+      setId(p_id);
+      setTarea(p_tarea);
+      setDescripcion(p_descripcion);
+      setIdestado(p_idestado);
+      setEstado(p_estado);
+      setAvance(p_avance);
+      setCreadorpor(p_creadopor);
+    }
   }
+  
 
     return (
       <>
@@ -138,6 +106,9 @@ export const TodoList = () => {
             <div className="text-start" id="todolist">
               <h5 className="font-size-33 text-right font-color-gray">TODO List</h5>
             </div>
+            <div>  
+          </div>
+
             <div className="border pt-3 px-3 col-sm-9 col-md-9 col-lg-9 backgorund-color-app2" style={{ paddingright: "7px" }} >
               <div className="row">
                 <div className="col-sm-10 col-md-10 col-lg-10 mb-4 text-end">
@@ -177,10 +148,10 @@ export const TodoList = () => {
                       </div>
                       <div className="col-lg-2 col-md-2 col-sm-2 text-end">
                         <div>
-                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitUpdatetHandler(2)} data-bs-toggle="modal" data-bs-target="#confEdit"><i className='fa fa-edit' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitCompletetHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confComplete"><i className='fa fa-check-square-o' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitCancelHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confCancel"><i className='fa fa-times-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
-                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitDeleteHandler(item.id, item.tarea, item.descripcion)} data-bs-toggle="modal" data-bs-target="#confDelete"><i className='fa fa-trash-o' style={{ fontSize: "16px" }}></i></button>
+                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(2, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confEdit"><i className='fa fa-edit' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confComplete"><i className='fa fa-check-square-o' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confCancel"><i className='fa fa-times-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confDelete"><i className='fa fa-trash-o' style={{ fontSize: "16px" }}></i></button>
                           <hr className="hr-line-buttons"></hr>
                           <div className="text-start form-floating mb-3">
                             <div className="progress mt-1" role="progressbar" aria-label="Example with label" aria-valuenow={item.avance} aria-valuemin="0" aria-valuemax="100">
@@ -191,10 +162,9 @@ export const TodoList = () => {
                             </div>
 
                             <div className="font-size-11 font-color-gray">
-                              <label for="floatingTextarea2Disabled">Progreso de la tarea</label>
+                              <label htmlFor="floatingTextarea2Disabled">Progreso de la tarea</label>
                             </div>
 
-                          
                           </div>
                         </div>
                       </div>
@@ -280,40 +250,28 @@ export const TodoList = () => {
           <div className="modal-dialog modal-md modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h1 className="modal-title" id="staticBackdropLabel" style={{ fontSize: "14px"}} ><b>Ejercicio Crud React | User Management</b></h1>
+                <h1 className="modal-title" id="staticBackdropLabel" style={{ fontSize: "14px"}} ><b>Crear Nueva Tarea</b></h1>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
                 <div className="card" style={{ width: "100%"}}>
                   <div className="text-center mt-3">
-                    <img src={avatar}className="card-img-top" alt="..." style={{ width: "50%"}} />
+                    <img src="../assets/img/tarea.png" className="card-img-top" alt="..." style={{ width: "50%"}} />
                   </div>
                     <div className="card-body">
                     <form onSubmit={submitHandler}>
-                        <legend className="font-size-17 text-center"><b>{name}</b></legend>
+                        <legend className="font-size-17 text-center"><b>{tarea}</b></legend>
                         <div className="mb-2">
-                          <label htmlFor="name" className="form-label font-size-14">Name</label>
-                          <input type="text" name="name" id="name" className="form-control font-size-14" placeholder="Name for user" defaultValue={name} onChange={(e) => l_changeName(e.target.value)} />
+                          <label htmlFor="Tarea" className="form-label font-size-14">Tarea</label>
+                          <input type="text" name="Tarea" id="Tarea" className="form-control font-size-14" placeholder="Tarea" defaultValue={tarea} onChange={(e) => l_changeTarea(e.target.value)} />
                         </div>
                         <div className="mb-2">
-                          <label htmlFor="password" className="form-label font-size-14">Password</label>
-                          <input type="text" name="password" id="password" className="form-control font-size-14" placeholder="Password for user" defaultValue={password} onChange={(e) => l_changePassword(e.target.value)} />
+                          <label htmlFor="descripcion" className="form-label font-size-14">Descripcion</label>
+                          <textarea rows="5" cols="33" name="descripcion" id="descripcion" className="form-control font-size-14" placeholder="Descripcion" defaultValue={descripcion} onChange={(e) => l_changeDescripcion(e.target.value)} />
                         </div>
                         <div className="mb-2">
-                          <label htmlFor="email" className="form-label font-size-14">Email</label>
-                          <input type="email" name="email" id="email" className="form-control font-size-14" placeholder="Email for user" defaultValue={email} onChange={(e) => l_changeEmail(e.target.value)} />
-                        </div>
-                        <div className="mb-2">
-                          <label htmlFor="avatar" className="form-label font-size-14">Avatar Url</label>
-                          <input type="text" name="avatar" id="avatar" className="form-control font-size-14" placeholder="Avatar for user" defaultValue={avatar} onChange={(e) => l_changeAvatar(e.target.value)} />
-                        </div>
-                        <div className="mb-2">
-                          <label htmlFor="role" className="form-label font-size-14">Role</label>
-                          <select name="role" id="role" className="form-select" aria-label="Default select example" onChange={(e) => l_changeRole(e.target.value)}>
-                            <option value={role} defaultValue>{role}</option>
-                            <option value="customer">customer</option>
-                            <option value="admin">admin</option>
-                          </select>
+                          <label htmlFor="creador" className="form-label font-size-14">Creado por:</label>
+                          <input type="text" name="creador" id="creador" className="form-control font-size-14" placeholder="Creado por:" defaultValue={creador} onChange={(e) => l_changeCreador(e.target.value)} />
                         </div>
                         <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-check-square' style={{ fontSize: "16px" }}></i>&nbsp;Guardar</button>                    
                     </form>
@@ -331,40 +289,43 @@ export const TodoList = () => {
           <div className="modal-dialog modal-md modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h1 className="modal-title" id="staticBackdropLabel" style={{ fontSize: "14px"}} ><b>Ejercicio Crud React | User Management</b></h1>
+                <h1 className="modal-title" id="staticBackdropLabel" style={{ fontSize: "14px"}} ><b>Todo List | Editar Tarea</b></h1>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
                 <div className="card" style={{ width: "100%"}}>
                   <div className="text-center mt-3">
-                    <img src={avatar}className="card-img-top" alt="..." style={{ width: "50%"}} />
+                    <img src="https://img.freepik.com/vector-premium/icono-lista-verificacion-iconos-web-establecidos_925480-66.jpg?w=826" className="card-img-top" alt="..." style={{ width: "30%"}} />
                   </div>
                     <div className="card-body">
                     <form onSubmit={submitHandler}>
-                        <legend className="font-size-17 text-center"><b>{name}</b></legend>
+                        <legend className="font-size-17 text-center"><b><u>{tarea}</u></b></legend>
                         <div className="mb-2">
-                          <label htmlFor="name" className="form-label font-size-14">Name</label>
-                          <input type="text" name="name" id="name" className="form-control font-size-14" placeholder="Name for user" defaultValue={name} onChange={(e) => l_changeName(e.target.value)} />
+                          <label htmlFor="Tarea" className="form-label font-size-14">Tarea</label>
+                          <input type="text" name="Tarea" id="Tarea" className="form-control font-size-14" placeholder="Tarea" defaultValue={tarea} onChange={(e) => l_changeTarea(e.target.value)} />
                         </div>
                         <div className="mb-2">
-                          <label htmlFor="password" className="form-label font-size-14">Password</label>
-                          <input type="text" name="password" id="password" className="form-control font-size-14" placeholder="Password for user" defaultValue={password} onChange={(e) => l_changePassword(e.target.value)} />
+                          <label htmlFor="descripcion" className="form-label font-size-14">Descripcion</label>
+                          <textarea rows="5" cols="33" name="descripcion" id="descripcion" className="form-control font-size-14" placeholder="Descripcion" defaultValue={descripcion} onChange={(e) => l_changeDescripcion(e.target.value)} />
                         </div>
                         <div className="mb-2">
-                          <label htmlFor="email" className="form-label font-size-14">Email</label>
-                          <input type="email" name="email" id="email" className="form-control font-size-14" placeholder="Email for user" defaultValue={email} onChange={(e) => l_changeEmail(e.target.value)} />
+                          <label htmlFor="idestado" className="form-label font-size-14">Estado</label>
+                            <select className="form-select" id="taskStatus" onChange={(e) => l_changeIdEstado()}>
+                              <option value={idestado} defaultValue>{estado}</option>
+                              <option value="1">Por hacer</option>
+                              <option value="2">En progreso</option>
+                              <option value="4">Finalizada</option>
+                              <option value="5">Borrado</option>
+                              <option value="6">Cancelada</option>
+                            </select>
                         </div>
                         <div className="mb-2">
-                          <label htmlFor="avatar" className="form-label font-size-14">Avatar Url</label>
-                          <input type="text" name="avatar" id="avatar" className="form-control font-size-14" placeholder="Avatar for user" defaultValue={avatar} onChange={(e) => l_changeAvatar(e.target.value)} />
+                          <label htmlFor="avance" className="form-label font-size-14">Avance</label>
+                          <input type="number" name="avance" id="avance" className="form-control font-size-14" placeholder="Avance" defaultValue={avance} onChange={(e) => l_changeAvance(e.target.value)} />
                         </div>
                         <div className="mb-2">
-                          <label htmlFor="role" className="form-label font-size-14">Role</label>
-                          <select name="role" id="role" className="form-select" aria-label="Default select example" onChange={(e) => l_changeRole(e.target.value)}>
-                            <option value={role} defaultValue>{role}</option>
-                            <option value="customer">customer</option>
-                            <option value="admin">admin</option>
-                          </select>
+                          <label htmlFor="modificador" className="form-label font-size-14">Creado por:</label>
+                          <input disabled type="text" name="modificador" id="modificador" className="form-control font-size-14" placeholder="Modificado por" defaultValue={creadorpor} />
                         </div>
                         <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-check-square' style={{ fontSize: "16px" }}></i>&nbsp;Guardar</button>                    
                     </form>

@@ -11,12 +11,20 @@ export const HookHelper = () => {
     const [jid, setJid] = useState('');
     const [jtarea, setJtarea] = useState('');
     const [jdescripcion, setJdescripcion] = useState('');
-    const [jidestado, setJidEstado] = useState('');
+    const [jidestado, setJidestado] = useState('');
     const [javance, setJavance] = useState('');
     const [jusuario, setJusuario] = useState('');
+    const [jcreador, setJcreador] = useState('');
+    const [jmodificador, setJmodificador] = useState('');
+
+    const [jvarFilter, setJvarFilter] = useState();
+    const [jvarordering, setJvarordering] = useState();
 
     // Metodo para filtro en la pagina //
-    const getTask = async (idestado, orderid) => {;
+    const getTask = async (idestado, orderid) => {
+        setJvarFilter(idestado);
+        setJvarFilter(orderid);
+
         const result = await axios.get(url+idestado+"/"+orderid);
         const resultData = await result;
         setData(resultData.data);
@@ -24,44 +32,51 @@ export const HookHelper = () => {
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        const userObject = {
-            name: jname,
-            password: jpassword,
-            email: jemail,
-            role: jrole,
-            avatar: javatar
-        }
+        let taskObject;
 
-        var url;
         var resultApi;
 
         if (joperacion == 1){
             // Create //
-            resultApi = await axios.post(url, userObject, {headers: {"Content-Type":"application/json", "Accept":"application/json"}});
-            //console.info("Creando ...");
+            
+            const taskObject = {
+                tarea: jtarea,
+                descripcion: jdescripcion,
+                creado_por: 'admin'
+            }
+
+            resultApi = await axios.post(url, taskObject, {headers: {"Content-Type":"application/json", "Accept":"application/json"}});
         } else {
             // Update //
-            url = "https://api.escuelajs.co/api/v1/users/"+idUser;
-            resultApi = await axios.put(url+iduser, userObject, {headers: {"Content-Type":"application/json", "Accept":"application/json"}});
-            //console.info("Actualizando ...");
+
+            const taskObject = {
+                tarea: jtarea,
+                descripcion: jdescripcion,
+                id_estado: jidestado,
+                avance: javance,
+                modificado_por: 'admin'
+            }
+
+            resultApi = await axios.put(url+jid, taskObject, {headers: {"Content-Type":"application/json", "Accept":"application/json"}});
         }
         
         try {
             const data = await resultApi;
             setResult(resultApi.data);
-            //console.info("resultApi "+ resultApi.data.id);
+            console.info("resultApi.data "+ resultApi.data.obj_creado[0]);
+            console.info("setAwa "+ resultApi.data.obj_creado[0].affectedRows);
 
-            if (resultApi.data.id > 0){
+            if (resultApi.data.obj_creado[0].affectedRows > 0){
                 if (joperacion == 1) {
-                    alertReactCrud("El usuario "+resultApi.data.name+" fue creado exitosamente.\n", 'success');
+                    alertReactCrud("La tarea fue creada exitosamente.\n"+resultApi.data.obj_creado[0].info, 'success');
                 } else {
-                    alertReactCrud("El usuario "+resultApi.data.name+" fue actualizado exitosamente.\n", 'success');
+                    alertReactCrud("La tarea fue actualizada exitosamente.\n"+resultApi.data.obj_creado[0].info, 'success');
                 }
             } else {
                 alertReactCrud("Ocurrio un error en el proceso.", 'error');
             }
 
-            getTask(-1);
+            getTask(-2, 2);
         } catch (error) {
         console.info(error.message || 'Error desconocido');
       }
@@ -124,7 +139,7 @@ export const HookHelper = () => {
         setJid,
         setJtarea,
         setJdescripcion,
-        setJidEstado,
+        setJidestado,
         setJavance,
         setJusuario,
         setJoperacion,
