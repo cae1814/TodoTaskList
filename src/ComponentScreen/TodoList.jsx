@@ -150,6 +150,23 @@ export const TodoList = () => {
                         </div>
                       </div>
                       <div className="col-lg-2 col-md-2 col-sm-2 text-end">
+                      { item.idestado >= 4 ? 
+                        <div>
+                          <button disabled type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(2, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confEdit"><i className='fa fa-edit' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button disabled type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confComplete"><i className='fa fa-check-square-o' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button disabled type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confCancel"><i className='fa fa-times-circle' style={{ fontSize: "16px" }}></i></button>&nbsp;
+                          <button disabled type="button" className="btn btn-outline-primary btn-sm" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confDelete"><i className='fa fa-trash-o' style={{ fontSize: "16px" }}></i></button>
+                          <hr className="hr-line-buttons"></hr>
+                          <div className="text-start form-floating mb-3">
+                            <div className="progress mt-1" role="progressbar" aria-label="Example with label" aria-valuenow={item.avance} aria-valuemin="0" aria-valuemax="100">
+                              <div className="progress-bar-deactive" style={{width: item.avance+"%"}}>{item.avance}%</div> 
+                            </div>
+                            <div className="font-size-11 font-color-gray">
+                              <label htmlFor="floatingTextarea2Disabled">Progreso de la tarea</label>
+                            </div>
+                          </div>
+                        </div>
+                        :
                         <div>
                           <button type="button" className="btn btn-outline-primary btn-sm effecs" onClick={() => l_submitHandler(2, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confEdit"><i className='fa fa-edit' style={{ fontSize: "16px" }}></i></button>&nbsp;
                           <button type="button" className="btn btn-outline-primary btn-sm effecs" onClick={() => l_submitHandler(-1, item.id, item.tarea, item.descripcion, item.idestado, item.estado, item.avance, item.creado_por)} data-bs-toggle="modal" data-bs-target="#confComplete"><i className='fa fa-check-square-o' style={{ fontSize: "16px" }}></i></button>&nbsp;
@@ -158,18 +175,14 @@ export const TodoList = () => {
                           <hr className="hr-line-buttons"></hr>
                           <div className="text-start form-floating mb-3">
                             <div className="progress mt-1 effecs" role="progressbar" aria-label="Example with label" aria-valuenow={item.avance} aria-valuemin="0" aria-valuemax="100">
-                            { item.idestado >= 4 ? 
-                              <div className="progress-bar-deactive" style={{width: item.avance+"%"}}>{item.avance}%</div> :
-                              <div className="progress-bar" style={{width: item.avance+"%"}}>{item.avance}%</div>
-                            }
-                            </div>
-
+                              <div className="progress-bar" style={{width: item.avance+"%"}}>{item.avance}%</div>                              
+                            </div>                          
                             <div className="font-size-11 font-color-gray">
                               <label htmlFor="floatingTextarea2Disabled">Progreso de la tarea</label>
                             </div>
-
                           </div>
                         </div>
+                        }
                       </div>
                     </div>
                   </div>
