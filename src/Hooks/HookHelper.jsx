@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {alertReactCrud} from "../js/functions.js";
+import {alertReactCrud, closeModal, focus} from "../js/functions.js";
 
 export const HookHelper = () => {
     const url = 'http://190.107.150.60:1510/task/';
@@ -28,8 +28,41 @@ export const HookHelper = () => {
         setData(resultData.data);
     }
 
+
+
     const submitHandler = async (event) => {
         event.preventDefault();
+
+        if (jtarea == '' ){
+            alertReactCrud("El Nombre de la tarea no puede estar vacio.", 'warning');
+            if (joperacion == 1){
+                focus('ntarea');
+            } else {
+                focus('etarea');
+            }
+            return;
+        } else if (jdescripcion == ''){
+            alertReactCrud("La descripcion de la tarea no puede estar vacio.", 'warning');
+            if (joperacion == 1){
+                focus('ndescripcion');
+            } else {
+                focus('edescripcion');
+            }
+            return;
+        } else {
+            if (joperacion == 1){
+                closeModal('btonNewClose');
+            } else {
+                if (javance > 100 || javance < 0){
+                   alertReactCrud("El avance de la tarea no puede ser mayor a 100 ni menor a 0", 'warning');
+                   focus('avance');
+                   return
+                } else {
+                    closeModal('btonEditClose');
+                }
+            }
+        }
+
         let taskObject;
 
         var resultApi;
@@ -61,14 +94,12 @@ export const HookHelper = () => {
         try {
             const data = await resultApi;
             setResult(resultApi.data);
-            console.info("resultApi.data "+ resultApi.data.obj_creado[0]);
-            console.info("setAwa "+ resultApi.data.obj_creado[0].affectedRows);
 
             if (resultApi.data.obj_creado[0].affectedRows > 0){
                 if (joperacion == 1) {
-                    alertReactCrud("La tarea fue creada exitosamente.\n"+resultApi.data.obj_creado[0].info, 'success');
+                    alertReactCrud("La tarea fue creada exitosamente.", 'success');
                 } else {
-                    alertReactCrud("La tarea fue actualizada exitosamente.\n"+resultApi.data.obj_creado[0].info, 'success');
+                    alertReactCrud("La tarea fue actualizada exitosamente.", 'success');
                 }
             } else {
                 alertReactCrud("Ocurrio un error en el proceso.", 'error');
@@ -93,7 +124,7 @@ export const HookHelper = () => {
 
         const result = await axios.put(url+jid, taskObject, {headers: {"Content-Type":"application/json", "Accept":"application/json"}});
         setResult(await result.data);
-        alertReactCrud("El registro fue guardado exitosamente.\n"+result[0], 'success');
+        alertReactCrud("La tarea fue completada exitosamente.", 'success');
         getTask(-2, 2);
     }
     
@@ -110,7 +141,7 @@ export const HookHelper = () => {
 
         const result = await axios.put(url+jid, taskObject, {headers: {"Content-Type":"application/json", "Accept":"application/json"}});
         setResult(await result.data);
-        alertReactCrud("El registro fue borrado exitosamente.\n"+result[0], 'success');
+        alertReactCrud("La tarea fue borrada exitosamente.", 'success');
         getTask(-2, 2);
     }
 
@@ -127,7 +158,7 @@ export const HookHelper = () => {
 
         const result = await axios.put(url+jid, taskObject, {headers: {"Content-Type":"application/json", "Accept":"application/json"}});
         setResult(await result.data);
-        alertReactCrud("El registro fue cancelado exitosamente.\n"+result[0], 'success');
+        alertReactCrud("La tarea fue cancelada exitosamente.", 'success');
         getTask(-2, 2);
     }
     

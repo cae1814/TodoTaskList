@@ -25,3 +25,15 @@ export function alertReactCrud(msg, icon) {
         timerProgressBar: true,
     });
 }
+
+export function focus(id){
+    document.getElementById(id).focus();
+}
+
+export function closeModal (id){
+    document.getElementById(id).click();
+}
+
+export function clearId (id){
+    document.getElementById(id).value = "";
+}

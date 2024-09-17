@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { HookHelper } from "../Hooks/HookHelper.jsx";
-import {alertReactCrud} from "../js/functions.js";
+import {alertReactCrud, clearId} from "../js/functions.js";
 import "../assets/font-awesome/css/font-awesome.min.css";
 
 export const TodoList = () => {
@@ -12,19 +12,19 @@ export const TodoList = () => {
   const [id, setId] = useState();
   const [operacion, setOperacion] = useState();
   const [selectedOption, setSelectedOption] = useState(-2);
-
-  const handleChange = () => {
-    const value = event.target.value;
-    setSelectedOption(value);
-    getTask(value, 2);
-  };
-
+  
   const [tarea, setTarea] = useState();
   const [descripcion, setDescripcion] = useState();
   const [idestado, setIdEstado] = useState();
   const [estado, setEstado] = useState();
   const [avance, setAvance] = useState();
   const [creadoPor, setCreadopor] = useState();
+
+  const handleChange = () => {
+    const value = event.target.value;
+    setSelectedOption(value);
+    getTask(value, 2);
+  };
 
   const l_changeTarea = (p_tarea) => {
     setTarea(p_tarea);
@@ -57,18 +57,16 @@ export const TodoList = () => {
   }
 
   const l_submitHandler = (p_operacion, p_id, p_tarea, p_descripcion, p_idestado, p_estado, p_avance, p_creadopor) => {
-    console.info("["+p_operacion+",["+p_id+"],["+p_tarea+"],["+p_descripcion+"],["+p_idestado+": "+p_estado+"],["+p_avance+"]");
     setOperacion(p_operacion);
     setJoperacion(p_operacion);
 
     if (p_operacion == 1) {
+      clearId('ntarea');
+      clearId('ndescripcion');
       // Create //
       // Almacenamiento local //
-      setId("");
       setTarea("");
       setDescripcion("");
-      setIdEstado("");
-      setAvance("");
     } else {
       // Modificar //
       // Hook //
@@ -88,7 +86,6 @@ export const TodoList = () => {
     }
   }
   
-
     return (
       <>
         <div className="mt-2 ml-4">
@@ -279,23 +276,23 @@ export const TodoList = () => {
                         <legend className="font-size-17 text-center"><b>Nueva tarea</b></legend>
                         <div className="mb-2">
                           <label htmlFor="Tarea" className="form-label font-size-14">Tarea</label>
-                          <input type="text" name="Tarea" id="Tarea" className="form-control font-size-14" placeholder="Tarea" defaultValue="" onChange={(e) => l_changeTarea(e.target.value)} />
+                          <input type="text" name="ntarea" id="ntarea" className="form-control font-size-14" placeholder="Tarea" onChange={(e) => l_changeTarea(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="descripcion" className="form-label font-size-14">Descripcion</label>
-                          <textarea rows="5" cols="33" name="descripcion" id="descripcion" className="form-control font-size-14" placeholder="Descripcion" defaultValue="" onChange={(e) => l_changeDescripcion(e.target.value)} />
+                          <textarea rows="5" cols="33" name="ndescripcion" id="ndescripcion" className="form-control font-size-14" placeholder="Descripcion" onChange={(e) => l_changeDescripcion(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="creador" className="form-label font-size-14">Creado por:</label>
-                          <input disabled type="text" name="creador" id="creador" className="form-control font-size-14" placeholder="Creado por:" defaultValue="admin" onChange={(e) => l_changeCreadoPor(e.target.value)} />
+                          <input disabled type="text" name="creador" id="creador" className="form-control font-size-14" placeholder="Creado por:" value="admin" onChange={(e) => l_changeCreadoPor(e.target.value)} />
                         </div>
-                        <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-check-square' style={{ fontSize: "16px" }}></i>&nbsp;Guardar</button>                    
+                        <button type="submit" className="btn btn-primary btn-sm"><i className='fa fa-check-square' style={{ fontSize: "16px" }}></i>&nbsp;Guardar</button>                    
                     </form>
                     </div>
                   </div>
                 </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-outline-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-reply' style={{ fontSize: "16px" }}></i>&nbsp;Cancelar</button>
+                <button id="btonNewClose" type="button" className="btn btn-outline-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-reply' style={{ fontSize: "16px" }}></i>&nbsp;Cancelar</button>
               </div>
             </div>
           </div>
@@ -318,15 +315,15 @@ export const TodoList = () => {
                         <legend className="font-size-17 text-center"><b><u>Modificar tarea</u></b></legend>
                         <div className="mb-2">
                           <label htmlFor="Tarea" className="form-label font-size-14">Tarea</label>
-                          <input type="text" name="Tarea" id="Tarea" className="form-control font-size-14" placeholder="Tarea" defaultValue={tarea} onChange={(e) => l_changeTarea(e.target.value)} />
+                          <input type="text" name="Tarea" id="etarea" className="form-control font-size-14" placeholder="Tarea" value={tarea} onChange={(e) => l_changeTarea(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="descripcion" className="form-label font-size-14">Descripcion</label>
-                          <textarea rows="3" cols="33" name="descripcion" id="descripcion" className="form-control font-size-14" placeholder="Descripcion" defaultValue={descripcion} onChange={(e) => l_changeDescripcion(e.target.value)} />
+                          <textarea rows="3" cols="33" name="edescripcion" id="edescripcion" className="form-control font-size-14" placeholder="Descripcion" value={descripcion} onChange={(e) => l_changeDescripcion(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="idestado" className="form-label font-size-14">Estado</label>
-                            <select className="form-select" id="taskStatus" onChange={(e) => l_changeIdEstado()}>
+                            <select className="form-select" id="etaskStatus" onChange={(e) => l_changeIdEstado()}>
                               <option value={idestado} defaultValue>{estado}</option>
                               <option value="1">Por hacer</option>
                               <option value="2">En progreso</option>
@@ -337,19 +334,19 @@ export const TodoList = () => {
                         </div>
                         <div className="mb-2">
                           <label htmlFor="avance" className="form-label font-size-14">Avance</label>
-                          <input type="number" name="avance" id="avance" className="form-control font-size-14" placeholder="Avance" defaultValue={avance} onChange={(e) => l_changeAvance(e.target.value)} />
+                          <input type="number" name="avance" id="avance" className="form-control font-size-14" placeholder="Avance" value={avance} min={0} max={100} onChange={(e) => l_changeAvance(e.target.value)} />
                         </div>
                         <div className="mb-2">
                           <label htmlFor="modificador" className="form-label font-size-14">Creado por:</label>
-                          <input disabled type="text" name="modificador" id="modificador" className="form-control font-size-14" placeholder="Modificado por" defaultValue={creadoPor} onChange={(e) => l_changeCreadoPor(e.target.value)} />
+                          <input disabled type="text" name="modificador" id="modificador" className="form-control font-size-14" placeholder="Modificado por" value={creadoPor} onChange={(e) => l_changeCreadoPor(e.target.value)} />
                         </div>
-                        <button type="submit" className="btn btn-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-check-square' style={{ fontSize: "16px" }}></i>&nbsp;Guardar</button>                    
+                        <button type="submit" className="btn btn-primary btn-sm"><i className='fa fa-check-square' style={{ fontSize: "16px" }}></i>&nbsp;Guardar</button>                    
                     </form>
                     </div>
                   </div>
                 </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-outline-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-reply' style={{ fontSize: "16px" }}></i>&nbsp;Cancelar</button>
+                <button id="btonEditClose" type="button" className="btn btn-outline-primary btn-sm" data-bs-dismiss="modal"><i className='fa fa-reply' style={{ fontSize: "16px" }}></i>&nbsp;Cancelar</button>
               </div>
             </div>
           </div>
