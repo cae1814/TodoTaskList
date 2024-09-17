@@ -97,6 +97,10 @@
     color: gray;
 }
 
+.font-color-black {
+    color: gray;
+}
+
 .font-color-orange {
     color: orange;
 }
@@ -226,7 +230,7 @@
 }
 
 .font-finalizado {
-    color: #BDBDBD;
+    color: black;
     text-decoration: line-through;
 }
 
